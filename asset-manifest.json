@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/react-todo-app/static/css/main.8be45b17.css",
-    "main.js": "/react-todo-app/static/js/main.68e072f8.js",
+    "main.css": "/react-todo-app/static/css/main.166eba80.css",
+    "main.js": "/react-todo-app/static/js/main.1e1324c5.js",
     "static/media/UtyaDuck-512px-13.gif": "/react-todo-app/static/media/UtyaDuck-512px-13.9b5a7a772a426167f558.gif",
     "static/media/UtyaDuck-512px-17.gif": "/react-todo-app/static/media/UtyaDuck-512px-17.64d0baca832e1fb4e5ad.gif",
-    "static/media/sf-ui-display-black-58646a6b80d5a.otf": "/react-todo-app/static/media/sf-ui-display-black-58646a6b80d5a.edfec25a073097238474.otf",
+    "static/media/sf-ui-display-bold-58646a511e3d9.otf": "/react-todo-app/static/media/sf-ui-display-bold-58646a511e3d9.4ac567b4926ac8d6459d.otf",
+    "static/media/sf-ui-display-medium.otf": "/react-todo-app/static/media/sf-ui-display-medium.32f938759a1b1b8ce03b.otf",
     "index.html": "/react-todo-app/index.html",
-    "main.8be45b17.css.map": "/react-todo-app/static/css/main.8be45b17.css.map",
-    "main.68e072f8.js.map": "/react-todo-app/static/js/main.68e072f8.js.map"
+    "main.166eba80.css.map": "/react-todo-app/static/css/main.166eba80.css.map",
+    "main.1e1324c5.js.map": "/react-todo-app/static/js/main.1e1324c5.js.map"
   },
   "entrypoints": [
-    "static/css/main.8be45b17.css",
-    "static/js/main.68e072f8.js"
+    "static/css/main.166eba80.css",
+    "static/js/main.1e1324c5.js"
   ]
 }
