@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +10,277 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.checkbox {
+  border: 1px solid black;
+  overflow: hidden;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+}
+
+.todo_item {
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  border: 1px solid #00000005;
+  box-shadow: 0px 1px 2px 0px #0000002e;
+  margin: 5px;
+  border-radius: 8px;
+  column-gap: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn_trash {
+  background: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox_active {
+  background: black;
+  color: white;
+}
+.completed_task {
+  text-decoration: line-through;
+}
+
+body {
+  margin: 0;
+  font-family: SF Pro Display;
+}
+input {
+  outline: none;
+  border: 0;
+  font-size: 15px;
+  font-family: SF Pro Display;
+  width: 100%;
+}
+.search-input {
+  border-radius: 8px;
+  background: transparent;
+  padding: 10px 15px;
+  background: #0000000a;
+  width: calc(100% - 30px);
+  margin-bottom: 15px;
+}
+.main-btn {
+  background: #9120ff;
+  color: white;
+  font-weight: 600;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 50px;
+  font-family: SF UI Display;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+.main-btn:hover {
+  background: #9e3eff;
+}
+.main {
+  /*width: 800px;
+  height: 500px;
+  margin-top: 50px;
+  margin: auto;
+  border-radius: 8px;
+  border: 1px solid #e2e2e2;
+  */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0px 5px 5px 1px #0000000d;
+}
+.compact-btn {
+  float: right;
+  color: black;
+  font-family: Segoe FLuent Icons;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: 0px 1px 1px 1px rgb(0 0 0 / 4%);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.left-menu, .content {
+  height: 100%;
+  overflow: hidden;
+  float: left;
+  padding: 15px;
+  box-sizing: border-box;
+  position: relative;
+}
+.left-menu {
+  background: #f9f9f9;
+  width: 300px;
+  border-right: 1px solid rgba(211, 211, 211, 0.3);
+}
+.content {
+  width: calc(100% - 300px);
+}
+.content__centered {
+  margin: auto;
+  max-width: 750px;
+}
+.content__title {
+  font-size: 20px;
+  padding: 10px 5px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  overflow: hidden;
+}
+.content__tasks-list {
+  max-height: calc(100% - 130px);
+  overflow-y: auto;
+}
+.addtab-form, .addtask-form {
+  bottom: 15px;
+  position: absolute;
+  width: calc(100% - 30px);
+  box-sizing: border-box;
+  padding: 12px;
+  background: #ffffff;
+  margin-bottom: 3px;
+  border-radius: 12px;
+  border: 1px solid #e2e2e2;
+}
+.addtask-form {
+  padding: 8px 12px;
+}
+.addtab-input {
+  width: 100px;
+}
+.addtask-input {
+  width: 395px;
+}
+
+.task-item {
+  background: #ffffff;
+  padding: 10px 10px 8px 8px;
+  margin: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid #e2e2e2;
+}
+.tab-item {
+  cursor: pointer;
+  margin-bottom: 3px;
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: 0.1s;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+.tab-item:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+.tab-active {
+  background: #ffffff !important;
+  box-shadow: 0px 1px 2px 0px #00000017;
+}
+.tab-item .badge {
+  width: 12px;
+  height: 12px;
+}
+.tab-item p {
+  margin: 0;
+}
+.counter {
+  background: #00000007;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 5px;
+  margin-left: auto;
+  animation-name: scale;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+}
+input.task-item-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 15px;
+}
+.addtab-badges {
+  overflow: hidden;
+  padding: 10px 0;
+}
+.badge {
+  width: 24px;
+  height: 24px;
+  background: #f2f2f2;
+  float: left;
+  margin: 0 2px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.badge-active {
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #9120ff;
+}
+.badge-orange {
+  background: #fef0cb;
+}
+.badge-red {
+  background: #fde1de;
+}
+.badge-yellow {
+  background: #fefdc5;
+}
+.badge-green {
+  background: #ceffd3;
+}
+.badge-purple {
+  background: #e4ceff;
+}
+.badge-blue {
+  background: #e6fdff;
+}
+
+.content__title h3 {
+  margin: 0;
+  float: left;
+}
+
+.checkbox:hover .checkbox__check {
+  background: #9e3eff08;
+}
+
+.checkbox__input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.checkbox__input:checked + .checkbox__check {
+  background: #9e3eff;
+}
+
+.checkbox__check {
+  margin-right: 15px;
+  border: 1px solid #e2e2e2;
+  background: transparent;
+  stroke: #f9f9f9;
+  border-radius: 8px;
+  fill: none;
+  transition: 0.1s ease;
+}
+
+
+@keyframes scale {   
+  0% {    
+    opacity: 0;
+    scale: 0.9;   
+  }   
+  100% {
+    opacity: 1;
+    scale: 1;
+   }
 }
