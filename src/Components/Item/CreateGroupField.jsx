@@ -1,22 +1,21 @@
 import React from 'react'
 
-export const CreateGroupField = ({addGroup}) => {
+export const CreateGroupField = ({addGroup, setActiveBadge, activeBadge, badges}) => {
     const [groupTitle, setGroupTitle] = React.useState('');
+    const changeBadge = (color) => {
+        setActiveBadge(color);
+        console.log(activeBadge);
+    }
     return (
         <div className="addtab-form">
-            <input className="addtab-input" placeholder="Type here" onChange={e => setGroupTitle(e.target.value)} value={groupTitle}/>
+            <input className="addtab-input" placeholder="Введите название группы" onChange={e => setGroupTitle(e.target.value)} value={groupTitle}/>
                 <div className="addtab-badges">
-                    <div className="badge badge-red badge-active"></div>
-                    <div className="badge badge-orange"></div>
-                    <div className="badge badge-yellow"></div>
-                    <div className="badge badge-green"></div>
-                    <div className="badge badge-blue"></div>
-                    <div className="badge badge-purple"></div>
+                    {badges.map(badge => <div className={`badge badge-${badge.color} ${badge.color == activeBadge ? 'badge-active' : ''}`} onClick={() => changeBadge(badge.color)}></div>)}
                 </div>
             <button className="main-btn addtab-btn" onClick={() => {
                 addGroup(groupTitle);
-                console.log('test')
-            }}>Add tab</button>
+                setGroupTitle('');
+            }}>Добавить</button>
         </div>
     )
 }

@@ -1,19 +1,24 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'SF UI Display Medium', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+	font-family: 'SF UI Display Medium'; 
+	src: url(/src/assets/sf-ui-display-medium.otf); 
+}
+
+@font-face {
+	font-family: 'SF UI Display Bold'; 
+	src: url(/src/assets/sf-ui-display-bold-58646a511e3d9.otf); 
 }
 
 .checkbox {
-  border: 1px solid black;
+  border: 1px solid #9e3eff;
   overflow: hidden;
   width: 16px;
   height: 16px;
@@ -32,6 +37,10 @@ code {
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
+  
+  animation-name: translate;
+  animation-duration: 0.2s;
+  animation-timing-function: ease;
 }
 
 .btn_trash {
@@ -42,7 +51,7 @@ code {
 }
 
 .checkbox_active {
-  background: black;
+  background: #9e3eff;
   color: white;
 }
 .completed_task {
@@ -51,33 +60,53 @@ code {
 
 body {
   margin: 0;
-  font-family: SF Pro Display;
 }
 input {
   outline: none;
   border: 0;
   font-size: 15px;
-  font-family: SF Pro Display;
+  font-family: 'SF UI Display Medium';
   width: 100%;
+  background: transparent;
 }
 .search-input {
   border-radius: 8px;
   background: transparent;
   padding: 10px 15px;
-  background: #0000000a;
+  background: #afafaf24;
   width: calc(100% - 30px);
-  margin-bottom: 15px;
+  background-image: url(./assets/search-interface-symbol.png);
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position-y: 11.5px;
+  background-position-x: 12px;
+  padding-left: 40px;
+  box-sizing: border-box;
+  width: 100%;
+}
+.top-menu {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  column-gap: 10px;
 }
 .main-btn {
   background: #9120ff;
   color: white;
-  font-weight: 600;
   padding: 8px 12px;
   border: 0;
-  border-radius: 50px;
-  font-family: SF UI Display;
+  border-radius: 8px;
+  font-family: 'SF UI Display Medium';
   cursor: pointer;
   transition: 0.1s ease;
+}
+.btn-secondary {
+  background: #afafaf24 !important;
+  color: gray;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main-btn:hover {
   background: #9e3eff;
@@ -93,9 +122,12 @@ input {
   width: 100%;
   height: 100%;
   position: absolute;
-  background: #ffffff;
   overflow: hidden;
   box-shadow: 0px 5px 5px 1px #0000000d;
+
+  /* animation-name: scale;
+  animation-duration: 0.5s;
+  animation-timing-function: ease; */
 }
 .compact-btn {
   float: right;
@@ -117,23 +149,41 @@ input {
   position: relative;
 }
 .left-menu {
-  background: #f9f9f9;
+  background: #afafaf14;
   width: 300px;
-  border-right: 1px solid rgba(211, 211, 211, 0.3);
+  border-right: 1px solid #afafaf2e;
+  transition: 0.2s ease;
+  backdrop-filter: blur(30px);
 }
+.closed-mode .left-menu {
+  margin-left: -300px;
+}
+.closed-mode .content {
+  width: 100%;
+}
+
 .content {
   width: calc(100% - 300px);
+  transition: 0.2s ease;
+  overflow-y: auto;
+  padding-top: 0;
 }
 .content__centered {
   margin: auto;
   max-width: 750px;
+  height: 100%;
+  position: relative;
 }
 .content__title {
   font-size: 20px;
-  padding: 10px 5px;
+  padding: 30px 5px 15px 5px;
   margin-bottom: 10px;
-  font-weight: 600;
+  font-family: 'SF UI Display Bold';
   overflow: hidden;
+  top: 0;
+  background: white;
+  position: sticky;
+  z-index: 100;
 }
 .content__tasks-list {
   max-height: calc(100% - 130px);
@@ -148,16 +198,16 @@ input {
   background: #ffffff;
   margin-bottom: 3px;
   border-radius: 12px;
-  border: 1px solid #e2e2e2;
+  border: 1px solid #afafaf47;
 }
 .addtask-form {
   padding: 8px 12px;
+  max-width:  750px;
+  position: fixed;
 }
-.addtab-input {
-  width: 100px;
-}
+
 .addtask-input {
-  width: 395px;
+  max-width: 750px;
 }
 
 .task-item {
@@ -193,7 +243,7 @@ input {
   margin: 0;
 }
 .counter {
-  background: #00000007;
+  background: #afafaf24;
   padding: 2px 6px;
   font-size: 12px;
   border-radius: 5px;
@@ -220,6 +270,7 @@ input.task-item-checkbox {
   border-radius: 50px;
   cursor: pointer;
   border: 2px solid transparent;
+  transition: 0.2s;
 }
 .badge-active {
   border: 2px solid white;
@@ -250,7 +301,7 @@ input.task-item-checkbox {
 }
 
 .checkbox:hover .checkbox__check {
-  background: #9e3eff08;
+  background: #9e3eff;
 }
 
 .checkbox__input {
@@ -283,4 +334,89 @@ input.task-item-checkbox {
     opacity: 1;
     scale: 1;
    }
+}
+
+
+@keyframes translate  {   
+  0% {    
+    opacity: 0;
+    scale: 1;   
+    transform: translateY(100px);
+  }   
+  100% {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0px);
+   }
+}
+
+@keyframes opacity {   
+  0% {    
+    opacity: 0;   
+  }   
+  100% {
+    opacity: 1;
+   }
+}
+
+
+.button-icon {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    display: flex;
+    opacity: 0.4;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.button-icon:hover {
+  opacity: 1;
+}
+
+.nothing-alert {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 50px;
+  box-sizing: border-box;
+  animation-name: scale;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  position: absolute;
+  height: calc(100% - 250px);
+  justify-content: center;
+}
+
+.dark-mode {
+  background: black;
+  color: white;
+}
+.dark-mode .tab-active {
+  background: #afafaf24 !important;
+}
+.dark-mode .addtab-form {
+  background: #afafaf24;
+}
+.dark-mode .content__title, .dark-mode .addtask-form {
+  background: black;
+}
+.dark-mode .todo_item {
+  background: #afafaf24;
+}
+.dark-mode .button-icon {
+  color: white;
+}
+
+
+@media screen and (max-width: 750px) {
+  .left-menu {
+    position: absolute;
+    z-index: 1000;
+  }
+  .content {
+    width: 100%;
+  }
 }
