@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h3 {
+  font-family: 'SF UI Display Bold';
+}
+
 @font-face {
 	font-family: 'SF UI Display Medium'; 
 	src: url(/src/assets/sf-ui-display-medium.otf); 
@@ -72,7 +76,7 @@ input {
 .search-input {
   border-radius: 8px;
   background: transparent;
-  padding: 10px 15px;
+  padding: 9px 15px;
   background: #afafaf24;
   width: calc(100% - 30px);
   background-image: url(./assets/search-interface-symbol.png);
@@ -83,6 +87,12 @@ input {
   padding-left: 40px;
   box-sizing: border-box;
   width: 100%;
+  border: 1px solid transparent;
+  transition: 0.1s ease;
+}
+.search-input:focus {
+  border: 1px solid #afafaf8e;
+  background-color: transparent;
 }
 .top-menu {
   display: flex;
@@ -103,10 +113,17 @@ input {
 .btn-secondary {
   background: #afafaf24 !important;
   color: gray;
-  width: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-secondary:active {
+  background: #afafaf50 !important;
+}
+.btn-square {
+  height: 38px;
+  width: 50px;
 }
 .main-btn:hover {
   background: #9e3eff;
@@ -184,6 +201,9 @@ input {
   background: white;
   position: sticky;
   z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .content__tasks-list {
   max-height: calc(100% - 130px);
@@ -390,6 +410,10 @@ input.task-item-checkbox {
   justify-content: center;
 }
 
+.ihherit {
+  position: inherit;
+}
+
 .dark-mode {
   background: black;
   color: white;
@@ -409,7 +433,9 @@ input.task-item-checkbox {
 .dark-mode .button-icon {
   color: white;
 }
-
+.dark-mode .modal {
+  background: #191919;
+}
 
 @media screen and (max-width: 750px) {
   .left-menu {
@@ -419,4 +445,62 @@ input.task-item-checkbox {
   .content {
     width: 100%;
   }
+  .modal {
+    width: 100%;
+  }
+}
+
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: #0000005c;
+    position: fixed;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    transition: scale 0s, opacity 0.2s;
+    opacity: 0;
+    display: flex;
+    pointer-events: none;
+}
+
+.opened_modal {
+  pointer-events: all;
+  transform: scale(1);
+  opacity: 1;
+}
+.opened_modal .modal {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+.modal {
+    transition: 0.15s ease-in-out;
+    opacity: 0;
+    width: 500px;
+    background: white;
+    border-radius: 20px;
+    transform: scale(1.4);
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 20px;
+}
+
+.modal_bottom-bar button {
+  float: left;
+  margin-right: 10px;
+  width: 50%;
+}
+
+.modal_bottom-bar {
+  justify-content: center;
+  display: flex;
+}
+
+.modal h3 {
+  font-family: 'SF UI Display Bold';
+  padding: 0 20px;
+  text-align: center;
 }

@@ -5,7 +5,12 @@ import { CreateGroupField } from './Item/CreateGroupField';
 import loading from '../assets/UtyaDuck-512px-17.gif';
 import nothing from '../assets/UtyaDuck-512px-13.gif';
 
-import {AiOutlineMenu} from 'react-icons/ai'
+import { Modal } from './Modal';
+import { Settings } from './Settings';
+
+import {AiOutlineMenu, AiOutlineSetting} from 'react-icons/ai'
+import {AiOutlineDelete} from 'react-icons/ai'
+import { Confirm } from './Confirm';
 
 const data = [
     {
@@ -40,7 +45,7 @@ const data = [
     },
     {
         _id: 6,
-        title: 'Finish the essay collaboration',
+        title: 'Drink tea',
         isCompleted: false,
         group: 1,
     },
@@ -58,13 +63,13 @@ const data = [
     },
     {
         _id: 9,
-        title: 'Finish the essay collaboration',
+        title: 'Do homework',
         isCompleted: false,
         group: 1,
     },
     {
         _id: 10,
-        title: 'Finish the essay collaboration',
+        title: 'Drink tea',
         isCompleted: true,
         group: 1,
     },
@@ -140,6 +145,9 @@ export const Home = () => {
     const [theme, setTheme] = React.useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
     const [activeTab, setActiveTab] = React.useState(0);
 
+    const [modalActive, setModalActive] = React.useState(false);
+    const [modalContent, setModalContent] = React.useState('');
+
     const [closeMenu, setCloseMenu] = React.useState(false);
 
 
@@ -175,38 +183,62 @@ export const Home = () => {
         }
     }
 
+    const openModal = (content) => {
+        setModalActive(true);
+        setModalContent(content);
+    }
+
+    const groupRemove = () => {
+
+            const id = groups.find(tab => tab.id == activeTab).id;
+            const todos_prev = [...todos];
+            const todos_upd = todos_prev.filter(items => items.group != id);
+            setTodos(todos_upd);
+
+            const copy = [...groups];
+            const current = copy.filter(group => group.id != id);
+            setGroups(current);
+            setActiveTab(0);
+            setModalActive(false);
+    }
+
   return (
     <div className={`main ${theme && 'dark-mode'}  ${closeMenu && 'closed-mode'}`} >
-        
-        <div className="left-menu" onClick={hideMenuMobile}>
-            {groups.map(tab => <div className={`tab-item ${tab.id == activeTab ? 'tab-active' : ''}`} onClick={() => setActiveTab(tab.id)}><div className={`badge badge-${badges.find(badge => tab.category == badge.id).color }`}></div><p>{tab.title}</p><div className={`${todos.filter(items => items.group == tab.id).length != 0 ? 'counter' : ''}`}>{todos.filter(items => items.group == tab.id).length != 0 ? todos.filter(items => items.group == tab.id).length : ''}</div></div>)}
+        <Modal content={modalContent} isActive={modalActive} setModalActive={setModalActive} />
+        <div className="left-menu">
+            {groups.map(tab => <div className={`tab-item ${tab.id == activeTab ? 'tab-active' : ''}`} onClick={() => {setActiveTab(tab.id); hideMenuMobile()}}><div className={`badge badge-${badges.find(badge => tab.category == badge.id).color }`}></div><p>{tab.title}</p><div className={`${todos.filter(items => items.group == tab.id).length != 0 ? 'counter' : ''}`}>{todos.filter(items => items.group == tab.id).length != 0 ? todos.filter(items => items.group == tab.id).length : ''}</div></div>)}
             <CreateGroupField addGroup={addGroup} setActiveBadge={setActiveBadge} badges={badges} activeBadge={activeBadge} />
-
-            <button className="main-btn" onClick={() => setTheme(!theme)} style={{position: "fixed", bottom: "30px", right: "30px", zIndex: "100"}}>{theme ? 'Светлая тема' : 'Темная тема (BETA)'}</button>
+            <button className='main-btn btn-secondary btn-square' onClick={() => openModal(<Settings theme={theme} setTheme={setTheme} />)}><AiOutlineSetting /></button>
         </div>
 
         <div className='content'>
             <div className='content__centered'>
                 
                 <div className='top-menu'>
-                    <button className="main-btn btn-secondary" onClick={() => setCloseMenu(!closeMenu)} ><AiOutlineMenu /></button>
+                    <button className="main-btn btn-secondary btn-square" onClick={() => setCloseMenu(!closeMenu)} ><AiOutlineMenu /></button>
                     <input className="search-input" placeholder="Поиск по задачам" onChange={e => {
                         setSearchRequest(e.target.value);
-                        console.log(searchRequest);
-                    }} />
+                    }} value={searchRequest} />
                 </div>
-
-            {searchRequest != 0 && todos.filter(items => items.title.toLowerCase().indexOf(searchRequest.toLowerCase()) > -1) ? 
+            {searchRequest.length !== 0 ? todos.filter(items => items.title.toLowerCase().indexOf(searchRequest.toLowerCase()) > -1).length !== 0 ? 
                 <div className='content__title'>
                     <h3>Результаты поиска</h3>
                 </div>
-            : ''}
-            {searchRequest != 0 && todos.filter(items => items.title.toLowerCase().indexOf(searchRequest.toLowerCase()) > -1) ? 
+            : <div className='nothing-alert ihherit' >
+                <img src={nothing} width={80} />
+                <p>По запросу "{searchRequest}" ничего не найдено</p>
+                <button className='main-btn btn-secondary' onClick={() => setSearchRequest('')}>ОК</button>
+            </div>
+            : ''
+                }
+
+            {searchRequest.length > 0 && todos.filter(items => items.title.toLowerCase().indexOf(searchRequest.toLowerCase()) > -1) ? 
             todos.filter(items => items.title.toLowerCase().indexOf(searchRequest.toLowerCase()) > -1)
             .map(todo => <Todo key={todo._id} todo={todo} changeCheckedState={changeCheckedState} removeTodo={removeTodo} />) : ''}
 
             <div className='content__title'>
                 <h3>{groups.find(tab => tab.id == activeTab).title}</h3>
+                {activeTab !== 0 && <button className="main-btn btn-secondary btn-square" onClick={ () =>       openModal(<Confirm setModalActive={setModalActive} groupRemove={groupRemove} />)} ><AiOutlineDelete /></button>}
             </div>
             
             {activeTab == 0 ? todos.map(todo => <Todo key={todo._id} todo={todo} changeCheckedState={changeCheckedState} removeTodo={removeTodo} />) :
@@ -214,6 +246,7 @@ export const Home = () => {
                 <div className='nothing-alert'>
                     <img src={nothing} width={80} />
                     <p>В этом списке ничего нет</p>
+                    <button className='main-btn btn-secondary' onClick={() => setActiveTab(0)}>Ко всем задачам</button>
                 </div> :
                 todos.filter(items => items.group == activeTab).map(todo => <Todo key={todo._id} todo={todo} changeCheckedState={changeCheckedState} removeTodo={removeTodo} />) 
             }
